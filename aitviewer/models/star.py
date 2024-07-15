@@ -77,7 +77,15 @@ class STARLayer(STAR):
     def n_joints_total(self):
         return self.n_joints_body + 1
 
-    def forward(self, poses_body, betas=None, poses_root=None, trans=None, normalize_root=False):
+    def forward(
+        self,
+        poses_body: torch.Tensor,
+        betas: torch.Tensor | None = None,
+        poses_root: torch.Tensor | None = None,
+        trans: torch.Tensor | None = None,
+        normalize_root: bool = False,
+        dtype: torch.Type = torch.float64
+    ):
         """
         forwards the model
         :param poses_body: Pose parameters.
@@ -90,11 +98,18 @@ class STARLayer(STAR):
         poses, betas, trans = self.preprocess(poses_body, betas, poses_root, trans, normalize_root)
 
         # STAR repo currently hardcodes floats.
-        v = super().forward(pose=poses.float(), betas=betas.float(), trans=trans.float())
+        v = super().forward(pose=poses.to(dtype), betas=betas.to(dtype), trans=trans.to(dtype))
         J = v.J_transformed
         return v, J
 
-    def preprocess(self, poses_body, betas=None, poses_root=None, trans=None, normalize_root=False):
+    def preprocess(
+        self,
+        poses_body: torch.Tensor,
+        betas: torch.Tensor | None = None,
+        poses_root: torch.Tensor | None = None,
+        trans: torch.Tensor | None = None,
+        normalize_root: bool = False,
+    ):
         batch_size = poses_body.shape[0]
 
         if poses_root is None:

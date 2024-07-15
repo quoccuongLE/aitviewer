@@ -1,7 +1,7 @@
 # Access SMPL models.
-smplx_models: "../data/smplx_models"
-star_models: "../data/star_models"
-supr_models: "../data/supr_models"
+smplx_models: "../model_store" # bug
+star_models: "../model_store/star/"
+supr_models: "../model_store/supr_models"
 
 # Access to datasets.
 datasets:

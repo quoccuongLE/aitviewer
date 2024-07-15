@@ -1,6 +1,7 @@
 # Copyright (C) 2023  ETH Zurich, Manuel Kaufmann, Velko Vechev, Dario Mylonopoulos
 import collections
 from abc import ABC
+import os
 
 import numpy as np
 import smplx
@@ -44,6 +45,10 @@ class SMPLLayer(nn.Module, ABC):
 
         smpl_model_params["use_pca"] = smpl_model_params.get("use_pca", False)
         smpl_model_params["flat_hand_mean"] = smpl_model_params.get("flat_hand_mean", True)
+
+        if os.path.isfile(C.smplx_models):
+            ext = C.smplx_models.split(".")[-1]
+            smpl_model_params.update({"ext": ext})
 
         self.bm = smplx.create(
             C.smplx_models,

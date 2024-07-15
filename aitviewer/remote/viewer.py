@@ -20,7 +20,7 @@ class RemoteViewer:
         :param timeout: a timeout in seconds for attempting to connect to the viewer.
         :param verbose: if True print info messages.
         """
-        url = f"ws://{host}:{port}"
+        url = f"http://{host}:{port}"
 
         if verbose:
             print(f"Connecting to remote viewer at {url}")
