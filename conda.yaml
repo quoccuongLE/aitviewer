@@ -1,0 +1,29 @@
+name: aitviewer
+channels:
+  - defaults
+  - pytorch
+  - conda-forge
+  - nvidia
+dependencies:
+  - python=3.10
+  - pytorch::pytorch=2.2.2
+  - pytorch::torchvision=0.17.2
+  - pytorch-cuda=12.1
+  - pip
+  - pip:
+    - smplx
+    - moderngl-window
+    - moderngl
+    - opencv-contrib-python-headless
+    - imgui
+    - tqdm
+    - trimesh
+    - scipy
+    - omegaconf
+    - roma
+    - joblib
+    - scikit-image
+    - scikit-video
+    - websockets
+    - usd-core
+    - PyQt6
